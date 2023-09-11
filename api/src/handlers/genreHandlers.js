@@ -1,7 +1,7 @@
-const { getAllGenres } = require('../controllers/typeController')
+const { getAllGenres } = require('../controllers/genreControllers')
 
 const getGenresHandler = async (req, res) => {
-	const { genre } = req.query
+	//const { genre } = req.query
 	try {
 		const response =  await getAllGenres()
 		return res.status(201).json(response)
