@@ -1,8 +1,7 @@
  const {
-	getAllGames
-// 	getPokemonByName,
-// 	getPokemons,
-// 	getPokemonById,
+	getAllGames,
+ 	getGameByName,
+ 	getGameById,
 // 	createPokemon,
 } = require('../controllers/videogameControllers')
 
@@ -16,26 +15,26 @@ const getVideogameHandler = async (req, res) => {
 		return res.status(400).json({ error: error.message })
 	}
 }
-const getVideogameByIdHandler = async (req, res) => {
-	//const { id } = req.params
-	try {
-		// const response = await getPokemonById(id)
-		// return res.status(200).json(response)
-        return res.send('estas en la ruta de getById')
-	} catch (error) {
-		return res.status(400).json({ error: error.message })
-	}
-}
 const getVideogameByNameHandler = async (req, res) => {
-	//const { id } = req.params
+	const { name } = req.params
 	try {
-		// const response = await getPokemonById(id)
-		// return res.status(200).json(response)
-        return res.send('estas en la ruta de getByName')
+		const response = await getGameByName(name)
+		 return res.status(200).json(response)
 	} catch (error) {
 		return res.status(400).json({ error: error.message })
 	}
 }
+const getVideogameByIdHandler = async (req, res) => {
+	const { id } = req.params
+	try {
+		const response = await getGameById(id)
+		return res.status(200).json(response)
+       
+	} catch (error) {
+		return res.status(400).json({ error: error.message })
+	}
+}
+
 const postVideogameHandler = async (req, res) => {
 	//const { Nombre, Imagen, Vida, Ataque, Defensa, Velocidad, Altura, Peso, Type } = req.body
 	try {
@@ -58,4 +57,4 @@ const postVideogameHandler = async (req, res) => {
 	}
 }
 
-module.exports = {getVideogameHandler}
+module.exports = {getVideogameHandler, getVideogameByNameHandler, getVideogameByIdHandler}
