@@ -80,7 +80,7 @@ const getGameByName = async (name) => {
       }),
     };
   });
-  return [...games, ...dataGameList];
+  return [...games, dataGameList];
 
 }
 
