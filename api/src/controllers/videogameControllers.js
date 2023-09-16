@@ -1,7 +1,9 @@
 const axios = require("axios");
 const { Videogame } = require("../db.js");
 const { API_KEY, GAME_URL } = process.env;
+const { Op } = require("sequelize");
 
+// const getGameByName = async (name) => {
 const getAllGames = async () => {
   let games = await Videogame.findAll();
 
@@ -9,7 +11,7 @@ const getAllGames = async () => {
   const response = await axios.get(`${GAME_URL}?key=${API_KEY}`);
   const gameList = response.data.results;
   // Process the data to create an array of Pokémon objects with specific properties
-  const dataGameList = gameList.map(( data ) => {
+  const dataGameList = gameList.map((data) => {
     const {
       id,
       name,
@@ -43,18 +45,20 @@ const getAllGames = async () => {
 const getGameByName = async (name) => {
   const nameLower = name.toLowerCase();
   let games = [];
-  games = await Videogame.findall({
+  games = await Videogame.findAll({
     where: {
       Nombre: {
-        [Op.iLike]: `%${nameLower}%`
-      }
+        [Op.iLike]: `%${nameLower}%`,
+      },
     },
-    limit: 15
+    limit: 15,
   });
-  const response = await axios.get(`${GAME_URL}?search=${nameLower}&key=${API_KEY}`);
+  const response = await axios.get(
+    `${GAME_URL}?search=${nameLower}&key=${API_KEY}`
+  );
   const apiVideogames = response.data.results.slice(0, 15);
 
-  const dataGameList = apiVideogames.map(( data ) => {
+  const dataGameList = apiVideogames.map((data) => {
     const {
       id,
       name,
@@ -81,13 +85,12 @@ const getGameByName = async (name) => {
     };
   });
   return [...games, dataGameList];
-
-}
+};
 
 const getGameById = async (id) => {
-  let game = []
-  const idInt = parseInt(id)
-  game = await Videogame.findByPk(idInt)
+  let game = [];
+  const idInt = parseInt(id);
+  game = await Videogame.findByPk(idInt);
   if (!game) {
     const response = await axios.get(`${GAME_URL}/${idInt}?key=${API_KEY}`);
     const {
@@ -114,9 +117,8 @@ const getGameById = async (id) => {
         return { Nombre: genre.name };
       }),
     };
-  
   }
   return game;
-}
+};
 
-module.exports = { getAllGames, getGameByName, getGameById  };
+module.exports = { getAllGames, getGameByName, getGameById };
