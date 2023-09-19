@@ -1,26 +1,26 @@
-import { GET_POKEMON, GET_POKEMON_BY_TYPES, SEARCH_POKEMON} from "./actions";
+import { GET_GAMES, GET_GAMES_BY_GENRE, SEARCH_GAMES} from "./actions";
 
 const initialState = {
-  pokemons :[],
+  games :[],
  
   
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_POKEMON:
+    case GET_GAMES:
       return {
         ...state,
-        pokemons: action.payload,
+        games: action.payload,
       };
-    case GET_POKEMON_BY_TYPES:
+    case GET_GAMES_BY_GENRE:
       return {
         ...state,
-        pokemons: action.payload,
+        games: action.payload,
       };
-      case SEARCH_POKEMON:
+      case SEARCH_GAMES:
       return {
         ...state,
-        pokemons: action.payload,
+        games: action.payload,
       };
     default:
       return state;

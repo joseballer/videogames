@@ -1,32 +1,32 @@
 import axios from "axios";
 
-export const GET_POKEMON = "GET_POKEMON";
-export const GET_POKEMON_BY_TYPES = "GET_POKEMON_BY_TYPES";
-export const SEARCH_POKEMON = "SEARCH_POKEMON";
+export const GET_GAMES = "GET_GAMES";
+export const GET_GAMES_BY_GENRE = "GET_GAMES_BY_GENRE";
+export const SEARCH_GAMES = "SEARCH_GAMES";
 
-export const getPokemons = (page) => {
+export const getGames = () => {
   return async (dispatch) => {
-    const pokemons = await axios.get(`http://localhost:3001/pokemons?page=${page}`);
-    dispatch({ type: GET_POKEMON, payload: pokemons.data[0] });
+    const games = await axios.get('http://localhost:3001/videogames');
+    dispatch({ type: GET_GAMES, payload: games.data[0] });
   };
 };
 
-export const getPokemonByTypes = (type) => {
+export const getPokemonByGenre = (genre) => {
   return async (dispatch) => {
-    const pokemons = await axios.get(`http://localhost:3001/types?type=${type}`);
-    dispatch({ type: GET_POKEMON_BY_TYPES, payload: pokemons.data });
+    const games = await axios.get(`http://localhost:3001/genre?genre=${genre}`);
+    dispatch({ type: GET_GAMES_BY_GENRE, payload: games.data });
   };
 };
 
 export const searchPokemon = (name) => {
   return async (dispatch) => {
     const response = await axios.get(
-      `http://localhost:3001/pokemons?name=${name}`
+      `http://localhost:3001/videogames?name=${name}`
     );
     if (response.data.length === 0) {
-      window.alert(`No Pokemon found with the name '${name}'`);
+      window.alert(`No Game was found with the name '${name}'`);
     } else {
-      dispatch({ type: SEARCH_POKEMON, payload: response.data });
+      dispatch({ type: SEARCH_GAMES, payload: response.data });
     }
   };
 };
