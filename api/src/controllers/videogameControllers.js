@@ -23,14 +23,14 @@ const getAllGames = async () => {
       background_image,
     } = data;
     return {
-      id: id,
+      ID: id,
       Nombre: name,
       Descripcion: description,
       Plataformas: platforms.map((platform) => {
         return { Nombre: platform.platform.name };
       }),
       Imagen: background_image,
-      Fecha_de_lanzamiento: released,
+      Lanzamiento: released,
       Rating: rating,
       Generos: genres.map((genre) => {
         return { Nombre: genre.name };
