@@ -27,18 +27,11 @@ const Detail = () => {
       <div className={style.stats}>
         <h1>Stats</h1>
         <h2>Descripcion: {character.Descripcion}</h2>
-        <h2>Plataformas: {character.Plataformas}</h2>
-        <h2>Fecha de lanzamiento: {character.Lanzamiento}</h2>: {character.Defensa}</h2>
+        {/* <h2>Plataformas: {character.Plataformas}</h2> */}
+        <h2>Fecha de lanzamiento: {character.Lanzamiento}</h2>
         <h2>Rating: {character.Rating}</h2>
-        <h2>Tipo: </h2>
-        <ul>
-          {/* {character.Type.map((type) => (
-            <li>{type.Nombre}</li>
-          ))} */}
-          {character.Type && Array.isArray(character.Type) ? character.Type.map((type) => (
-            <li>{type.Nombre}</li>
-          )) : null}
-        </ul>
+
+        
       </div>
     </div>
   );

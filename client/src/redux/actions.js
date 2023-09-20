@@ -7,7 +7,7 @@ export const SEARCH_GAMES = "SEARCH_GAMES";
 export const getGames = () => {
   return async (dispatch) => {
     const games = await axios.get('http://localhost:3001/videogames');
-    dispatch({ type: GET_GAMES, payload: games.data[0] });
+    dispatch({ type: GET_GAMES, payload: games.data });
   };
 };
 
