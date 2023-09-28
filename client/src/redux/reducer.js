@@ -1,9 +1,13 @@
-import { GET_GAMES, GET_GAMES_BY_GENRE, SEARCH_GAMES} from "./actions";
+import {
+  GET_GAMES,
+  GET_GAMES_BY_GENRE,
+  SEARCH_GAMES,
+  SET_CURRENT_PAGE,
+} from "./actions";
 
 const initialState = {
-  games :[],
- 
-  
+  games: [],
+  currentPage: 1,
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -17,7 +21,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         games: action.payload,
       };
-      case SEARCH_GAMES:
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
+      };
+    case SEARCH_GAMES:
       return {
         ...state,
         games: action.payload,
@@ -25,7 +34,6 @@ const reducer = (state = initialState, action) => {
     default:
       return state;
   }
-
-}
+};
 
 export default reducer;

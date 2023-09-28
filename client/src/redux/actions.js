@@ -3,22 +3,23 @@ import axios from "axios";
 export const GET_GAMES = "GET_GAMES";
 export const GET_GAMES_BY_GENRE = "GET_GAMES_BY_GENRE";
 export const SEARCH_GAMES = "SEARCH_GAMES";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 export const getGames = () => {
   return async (dispatch) => {
-    const games = await axios.get('http://localhost:3001/videogames');
+    const games = await axios.get("http://localhost:3001/videogames");
     dispatch({ type: GET_GAMES, payload: games.data });
   };
 };
 
-export const getPokemonByGenre = (genre) => {
+export const getGenre = (genre) => {
   return async (dispatch) => {
     const games = await axios.get(`http://localhost:3001/genre?genre=${genre}`);
     dispatch({ type: GET_GAMES_BY_GENRE, payload: games.data });
   };
 };
 
-export const searchPokemon = (name) => {
+export const searchGame = (name) => {
   return async (dispatch) => {
     const response = await axios.get(
       `http://localhost:3001/videogames?name=${name}`
@@ -30,3 +31,8 @@ export const searchPokemon = (name) => {
     }
   };
 };
+
+export const setCurrentPage = (page) => ({
+  type: SET_CURRENT_PAGE,
+  payload: page,
+});

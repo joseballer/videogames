@@ -1,15 +1,15 @@
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 import Card from "../card/Card";
 import style from "./Cards.module.css";
 
-const Cards = () => {
-  const characters = useSelector((state) => state.games);
-  console.log(characters);
+const Cards = ({currentCards}) => {
+ 
+  
   return (
     <>
       <div className={style.container}>
         <div className={style.cards}>
-          {characters.map((character) => (
+          {currentCards.map((character) => (
             <Card
               key={character.ID}
               id={character.ID}
