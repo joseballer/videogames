@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export const GET_GAMES = "GET_GAMES";
-export const GET_GAMES_BY_GENRE = "GET_GAMES_BY_GENRE";
 export const SEARCH_GAMES = "SEARCH_GAMES";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const FILTER_GAMES_BY_GENRE = "FILTER_GAMES_BY_GENRE";
 
 export const getGames = () => {
   return async (dispatch) => {
@@ -12,12 +12,16 @@ export const getGames = () => {
   };
 };
 
-export const getGenre = (genre) => {
-  return async (dispatch) => {
-    const games = await axios.get(`http://localhost:3001/genre?genre=${genre}`);
-    dispatch({ type: GET_GAMES_BY_GENRE, payload: games.data });
+export const filterGamesByGenre = (genre) => {
+  return (dispatch, getState) => {
+    const games = getState().games;
+    const filteredGames = games.filter((game) =>
+      game.Generos.some((g) => g.Nombre === genre)
+    );
+    dispatch({ type: FILTER_GAMES_BY_GENRE, payload: filteredGames });
   };
 };
+
 
 export const searchGame = (name) => {
   return async (dispatch) => {

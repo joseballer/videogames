@@ -45,7 +45,7 @@ const getAllGames = async () => {
   let games = await Videogame.findAll();
 
   // Necesitamos 8 páginas para obtener 120 juegos
-  for (let i = 1; i <= 8; i++) {
+  for (let i = 1; i <= 10; i++) {
     // Fetch the list of games from the RAWG API
     const response = await axios.get(`${GAME_URL}?key=${API_KEY}&page=${i}&page_size=15`);
     const gameList = response.data.results;
@@ -98,7 +98,6 @@ const getGameByName = async (name) => {
     `${GAME_URL}?search=${nameLower}&key=${API_KEY}`
   );
   const apiVideogames = response.data.results.slice(0, 15);
-
   const dataGameList = apiVideogames.map((data) => {
     const {
       id,
@@ -125,7 +124,9 @@ const getGameByName = async (name) => {
       }),
     };
   });
-  return [...games, dataGameList];
+  
+   games = [...games, ...dataGameList]
+   return games;
 };
 
 const getGameById = async (id) => {

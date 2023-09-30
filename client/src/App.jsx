@@ -1,18 +1,20 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route , useLocation} from 'react-router-dom'
 import './App.css'
 import Home from './views/home/home'
 import Landing from './views/landing/landing'
 import Detail from './views/detail/Detail'
+import Nav from './components/nav/Nav'
 function App() {
-
+  const { pathname } = useLocation();
   return (
     <div>
+      {pathname !== "/" && <Nav/>}
       <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />
           {/* <Route path="/form" element={<Form/>}/>  */}
-        </Routes>
+      </Routes>
     </div>
   )
 }

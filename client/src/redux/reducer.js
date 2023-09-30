@@ -1,8 +1,8 @@
 import {
   GET_GAMES,
-  GET_GAMES_BY_GENRE,
   SEARCH_GAMES,
   SET_CURRENT_PAGE,
+  FILTER_GAMES_BY_GENRE,
 } from "./actions";
 
 const initialState = {
@@ -16,10 +16,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         games: action.payload,
       };
-    case GET_GAMES_BY_GENRE:
+    case FILTER_GAMES_BY_GENRE:
       return {
         ...state,
-        games: action.payload,
+        games: action.payload, 
       };
     case SET_CURRENT_PAGE:
       return {
@@ -30,6 +30,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         games: action.payload,
+        
       };
     default:
       return state;
