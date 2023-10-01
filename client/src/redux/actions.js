@@ -4,6 +4,16 @@ export const GET_GAMES = "GET_GAMES";
 export const SEARCH_GAMES = "SEARCH_GAMES";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const FILTER_GAMES_BY_GENRE = "FILTER_GAMES_BY_GENRE";
+export const SORT_GAMES_BY_NAME_ASC = 'SORT_GAMES_BY_NAME_ASC';
+export const SORT_GAMES_BY_NAME_DESC = 'SORT_GAMES_BY_NAME_DESC';
+export const SORT_GAMES_BY_RATING_ASC = 'SORT_GAMES_BY_RATING_ASC';
+export const SORT_GAMES_BY_RATING_DESC = 'SORT_GAMES_BY_RATING_DESC';
+
+export const sortGamesByNameAsc = () => ({ type: SORT_GAMES_BY_NAME_ASC });
+export const sortGamesByNameDesc = () => ({ type: SORT_GAMES_BY_NAME_DESC });
+export const sortGamesByRatingAsc = () => ({ type: SORT_GAMES_BY_RATING_ASC });
+export const sortGamesByRatingDesc = () => ({ type: SORT_GAMES_BY_RATING_DESC });
+
 
 export const getGames = () => {
   return async (dispatch) => {

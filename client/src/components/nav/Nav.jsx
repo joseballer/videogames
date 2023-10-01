@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import style from "./Nav.module.css";
 import SearchBar from "../searchbar/SearchBar";
 import Filter from "../filter/Filter";
+import Sort from "../sort/Sort";
 
-const Nav = ({ onSearch }) => {
+
+const Nav = () => {
   return (
     <nav className={style.navContainer}>
       <div className={style.linksContainer}>
@@ -12,12 +14,13 @@ const Nav = ({ onSearch }) => {
           <Link to="/form">Crear Pokemon</Link>
         </div>
         <div>
-          <SearchBar onSearch={onSearch} />
+          <SearchBar />
         </div>
       </div>
       <div>
         <Filter />
       </div>
+      <div><Sort/></div>
     </nav>
   );
 };
