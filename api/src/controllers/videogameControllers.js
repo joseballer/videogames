@@ -47,7 +47,9 @@ const getAllGames = async () => {
   // Necesitamos 8 páginas para obtener 120 juegos
   for (let i = 1; i <= 10; i++) {
     // Fetch the list of games from the RAWG API
-    const response = await axios.get(`${GAME_URL}?key=${API_KEY}&page=${i}&page_size=15`);
+    const response = await axios.get(
+      `${GAME_URL}?key=${API_KEY}&page=${i}&page_size=15`
+    );
     const gameList = response.data.results;
     // Process the data to create an array of game objects with specific properties
     const dataGameList = gameList.map((data) => {
@@ -124,9 +126,9 @@ const getGameByName = async (name) => {
       }),
     };
   });
-  
-   games = [...games, ...dataGameList]
-   return games;
+
+  games = [...games, ...dataGameList];
+  return games;
 };
 
 const getGameById = async (id) => {
@@ -163,4 +165,29 @@ const getGameById = async (id) => {
   return game;
 };
 
-module.exports = { getAllGames, getGameByName, getGameById };
+const createGame = async (
+  ID,
+  Nombre,
+  Descripcion,
+  Plataformas,
+  Imagen,
+  Fecha_de_lanzamiento,
+  Rating,
+  Genre,
+) => {
+  const newGame = await Videogame.create({
+    ID,
+    Nombre,
+    Descripcion,
+    Plataformas,
+    Imagen,
+    Fecha_de_lanzamiento,
+    Rating,
+  });
+  Genre.forEach((genre) => {
+    newGame.addGenre(genre); 
+  });
+  return newGame; 
+};
+
+module.exports = { getAllGames, getGameByName, getGameById, createGame };

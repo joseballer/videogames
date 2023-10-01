@@ -2,7 +2,7 @@ const {
   getAllGames,
   getGameByName,
   getGameById,
-  // 	createPokemon,
+  createGame,
 } = require("../controllers/videogameControllers");
 
 const getVideogameHandler = async (req, res) => {
@@ -27,25 +27,33 @@ const getVideogameByIdHandler = async (req, res) => {
 };
 
 const postVideogameHandler = async (req, res) => {
-  //const { Nombre, Imagen, Vida, Ataque, Defensa, Velocidad, Altura, Peso, Type } = req.body
+  const {
+    ID,
+    Nombre,
+    Descripcion,
+    Plataformas,
+    Imagen,
+    Fecha_de_lanzamiento,
+    Rating,
+    Genre,
+  } = req.body;
   try {
-    // const newPokemon = await createPokemon(
-    // 	Nombre,
-    // 	Imagen,
-    // 	Vida,
-    // 	Ataque,
-    // 	Defensa,
-    // 	Velocidad,
-    // 	Altura,
-    // 	Peso,
-    // 	Type
-    // )
+    const newGame = await createGame(
+      ID,
+      Nombre,
+      Descripcion,
+      Plataformas,
+      Imagen,
+      Fecha_de_lanzamiento,
+      Rating,
+      Genre, 
+    )
     return res
       .status(201)
-      .send(`el pokemon ha sido creado correctamente con el ID`);
+      .send(`el juego ${newGame.Nombre}  ha sido creado correctamente con el ID ${newGame.ID}`);
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
 };
 
-module.exports = { getVideogameHandler, getVideogameByIdHandler };
+module.exports = { getVideogameHandler, getVideogameByIdHandler , postVideogameHandler};
